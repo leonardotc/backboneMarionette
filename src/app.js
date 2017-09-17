@@ -4,6 +4,7 @@ import { history } from 'backbone'
 import Routes from './config/routes'
 
 const App = new Application({
+  region: '#main-content',
 
   onStart(options) {
     this.router = new AppRouter({
