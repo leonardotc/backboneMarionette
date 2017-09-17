@@ -2,7 +2,7 @@ import { Model } from 'backbone'
 import Routes from '../config/routes'
 
 const Video = Model.extend({
-  urlRoot: Routes.videosPath,
+  urlRoot: Routes.videoPath,
 
   parse: ({items}) => items[0]
 
