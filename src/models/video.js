@@ -5,8 +5,9 @@ import _ from 'underscore'
 const Video = Model.extend({
   urlRoot: Routes.videoPath,
 
-  parse: ({items}) => _.extend(items[0], { url: `http://www.youtube.com/v/${items[0].id}` }),
-
+  parse: (data) => data.hasOwnProperty('items') ?
+    _.extend(data.items[0], { url: `http://www.youtube.com/v/${data.items[0].id}` }) :
+    data
 })
 
 export default Video

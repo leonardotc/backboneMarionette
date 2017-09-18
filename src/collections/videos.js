@@ -4,13 +4,13 @@ import Routes from '../config/routes'
 
 const Videos = Collection.extend({
   model: Video,
-  url: Routes.videosChannelPath,
   
-  initialize(options) {
-    this.data = { channelId: options.data }
+  initialize({ channelId }) {
+    this.channelId = channelId
+    this.url = `${Routes.videosChannelPath()}/${this.channelId}`
   },
 
-  parse: (data) => data.items
+  parse: ({items}) => items
 })
 
 export default Videos

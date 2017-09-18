@@ -22,8 +22,11 @@ const Controller = Object.extend({
   },
 
   showVideos(channelId) {
-    const videos = new Videos({id: 'UCWRbcEYuQc1Jcl3Wyu6f9sw'})
-    videos.fetch().then((content) => console.log("videos", videos))
+    const videos = new Videos({ channelId })
+    videos.fetch().then((content) => { 
+      console.log("videos", videos)
+      console.log("content", content)
+    })
   }
 
 })
