@@ -1,3 +1,4 @@
+import _ from 'underscore'
 import { Collection } from 'backbone'
 import Video from '../models/video'
 import Routes from '../config/routes'
@@ -10,7 +11,10 @@ const Videos = Collection.extend({
     this.url = `${Routes.videosChannelPath()}/${this.channelId}`
   },
 
-  parse: ({items}) => items
+  parse: ({items}) => {
+    
+    return _.map(items, (item) => Object.assign(item, {id: item.id.playlistId}))
+  }
 })
 
 export default Videos
