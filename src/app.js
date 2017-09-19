@@ -1,5 +1,5 @@
 import AppRouter from './router/index.js'
-import { Application } from 'backbone.marionette'
+import { Application, Renderer } from 'backbone.marionette'
 import { history } from 'backbone'
 import Routes from './config/routes'
 

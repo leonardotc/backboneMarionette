@@ -2,6 +2,7 @@ import { Object } from 'backbone.marionette'
 import Video from '../models/video'
 import Videos from '../collections/videos'
 import VideoView from '../views/video'
+import VideosView from '../views/videos'
 
 const Controller = Object.extend({
   initialize(options) {
@@ -24,8 +25,8 @@ const Controller = Object.extend({
   showVideos(channelId) {
     const videos = new Videos({ channelId })
     videos.fetch().then((content) => { 
-      //TODO: implement the view
-      console.log(videos)
+      const view = new VideosView({ collection: videos})
+      this.app.showView(view)
     })
   }
 
