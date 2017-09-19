@@ -11,10 +11,8 @@ const Videos = Collection.extend({
     this.url = `${Routes.videosChannelPath()}/${this.channelId}`
   },
 
-  parse: ({items}) => {
-    
-    return _.map(items, (item) => Object.assign(item, {id: item.id.playlistId}))
-  }
+  parse: ({items}) => 
+    _.map(items, (item) => Object.assign(item, {id: item.id.videoId}))
 })
 
 export default Videos

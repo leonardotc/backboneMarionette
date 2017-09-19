@@ -18,6 +18,7 @@ app.get("/api/videos/youtube/channel/:channel", (req, res) => {
   const params = [
     ['channelId', req.params.channel],
     ['key', API_KEY],
+    ['type', 'video'],
     ['part', parts.join(",")]
   ]
 

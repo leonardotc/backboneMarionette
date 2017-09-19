@@ -25,6 +25,7 @@ const Controller = Object.extend({
     const videos = new Videos({ channelId })
     videos.fetch().then((content) => { 
       //TODO: implement the view
+      console.log(videos)
     })
   }
 
