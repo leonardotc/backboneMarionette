@@ -3,7 +3,8 @@ import _ from 'underscore'
 import Video from './video.js'
 
 const Videos = CollectionView.extend({
-  childView: Video
+  childView: Video,
+  tagName: 'ul'
 })
 
 export default Videos

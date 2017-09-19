@@ -3,7 +3,8 @@ import _ from 'underscore'
 import template from './templates/video.jst'
 
 const VideoView = View.extend({
-  template: template
+  template: template,
+  tagName: 'li'
 })
 
 export default VideoView
