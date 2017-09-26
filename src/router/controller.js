@@ -1,7 +1,7 @@
 import { Object } from 'backbone.marionette'
 import Video from '../models/video'
 import Videos from '../collections/videos'
-import VideoView from '../views/video'
+import ChannelVideoView from '../views/channel_video'
 import VideosView from '../views/videos'
 
 const Controller = Object.extend({
@@ -13,20 +13,21 @@ const Controller = Object.extend({
     console.log("test it")
   },
 
-  showVideo(id) {
-    const video = new Video({id: '2LtGZJvbjTQ'})
-    
-    video.fetch().then(() => {
-      const view = new VideoView({ model: video })
+  showVideo(channelId, id) {
+    const video = new Video({ id })
+    const videos = new Videos({ channelId })
+
+    Promise.all([videos.fetch(), video.fetch()]).then(() => {
+      const view = new ChannelVideoView({ collection: videos, model: video })
       this.app.showView(view)
     })
   },
 
   showVideos(channelId) {
     const videos = new Videos({ channelId })
-    videos.fetch().then((content) => { 
-      console.log(content)
-      const view = new VideosView({ collection: videos})
+
+    videos.fetch().then(content => {
+      const view = new VideosView({ collection: videos })
       this.app.showView(view)
     })
   }

@@ -8,7 +8,7 @@ const Router = AppRouter.extend({
 
   appRoutes: {
     'channel/:channelId': 'showVideos',
-    'videos/:id': 'showVideo',
+    'channel/:channelId/video/:id': 'showVideo',
     '':'showRoot'
   }
 })
