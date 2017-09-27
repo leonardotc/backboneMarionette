@@ -3,12 +3,33 @@ const app = express()
 const path = require('path')
 const axios = require('axios')
 const _ = require('underscore')
-const API_KEY = require("./config/index").API_KEY
+const keys = require("./config/index")
+
+const YOUTUBE_API_KEY = keys.YOUTUBE_API_KEY
+const TWITCH_CLIENT_ID = keys.TWITCH_CLIENT_ID
 
 app.use(express.static("build"))
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")))
 
 const YOUTUBE_URL = "https://www.googleapis.com/youtube/v3"
+const TWITCH_URL = "https://api.twitch.tv/kraken"
+
+app.get("/api/videos/twitch/:channel", (req, res) => {
+
+  const params = [
+    ['client_id', TWITCH_CLIENT_ID]
+  ]
+
+  const query_string = 
+    _.map(params, (param) => param.join("="))
+    .join("&")
+
+    console.log(`${TWITCH_URL}/channels/${req.params.channel}/videos?${query_string}`)
+
+  axios.get(`${TWITCH_URL}/channels/${req.params.channel}/videos?${query_string}`)
+    .then(({data}) => res.send(data))
+
+})
 
 // TODO: Refactor
 app.get("/api/videos/youtube/channel/:channel", (req, res) => {
@@ -17,7 +38,7 @@ app.get("/api/videos/youtube/channel/:channel", (req, res) => {
   const parts = ["snippet"]
   const params = [
     ['channelId', req.params.channel],
-    ['key', API_KEY],
+    ['key', YOUTUBE_API_KEY],
     ['type', 'video'],
     ['part', parts.join(",")]
   ]
@@ -36,7 +57,7 @@ app.get("/api/videos/youtube/:id", (req, res) => {
   const parts = ["snippet", "contentDetails" , "statistics", "status"]
   const params = [
     ['id', req.params.id],
-    ['key', API_KEY],
+    ['key', YOUTUBE_API_KEY],
     ['part', parts.join(",")]
   ]
 
