@@ -1,4 +1,4 @@
-import Bb from 'backbone'
+import { history } from 'backbone'
 import { View } from 'backbone.marionette'
 import _ from 'underscore'
 import template from './templates/video.jst'
@@ -8,12 +8,13 @@ const VideoView = View.extend({
   tagName: 'li',
 
   events: {
-    'click a': 'log'
+    'click a': 'showVideo'
   },
 
-  log(e) {
+  showVideo(e) {
     e.preventDefault()
-    Bb.history.navigate(`${Bb.history.getFragment()}/video/${this.model.id}`, {trigger: true});
+    history.navigate(`channel/${this.model.collection.channelId}/video/${this.model.id}`, 
+      { trigger: true })
   }
 
 })
